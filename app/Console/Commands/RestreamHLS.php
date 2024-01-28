@@ -111,9 +111,13 @@ class RestreamHLS extends Command
 
     private function stopExistingProcesses()
     {
-        $existingProcessesCommand = "pkill -f 'ffmpeg'";
-        $existingProcesses = Process::fromShellCommandline($existingProcessesCommand);
-        $existingProcesses->run();
+        try {
+            $existingProcessesCommand = "pkill -f 'ffmpeg'";
+            $existingProcesses = Process::fromShellCommandline($existingProcessesCommand);
+            $existingProcesses->run();
+        }catch (ProcessFailedException $exception) {
+            $this->error('The process failed: ' . $exception->getMessage());
+        }
     }
 
     private function getChannels($channelUrl)

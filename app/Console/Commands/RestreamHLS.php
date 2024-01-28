@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\Channel;
 use App\Models\StreamChannel;
+use Exception;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
 use Symfony\Component\Process\Process;
@@ -25,7 +26,7 @@ class RestreamHLS extends Command
         $basePath = base_path('public/channels');
 
         // Stop existing FFMPEG processes outside the loop
-        $this->stopExistingProcesses();
+//        $this->stopExistingProcesses();
 
         foreach ($channels as $channel) {
             $channelUrl = $channel->stream_url;

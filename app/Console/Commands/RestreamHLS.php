@@ -22,7 +22,7 @@ class RestreamHLS extends Command
     public function handle()
     {
         $channels = Channel::all();
-        $basePath = base_path('public');
+        $basePath = base_path('public/channels');
 
         // Stop existing FFMPEG processes outside the loop
         $this->stopExistingProcesses();

@@ -76,7 +76,8 @@ class RestreamHLS extends Command
                 // No need to check for existing FFMPEG processes within the loop
 
                 $process = Process::fromShellCommandline($ffmpegCommand);
-                $process->setTimeout(null); // Set the timeout to null (no timeout)
+                // Set the timeout to 15 minutes (900 seconds)
+                $process->setTimeout(900);
                 $process->start();
 
                 usleep(100000); // 100 milliseconds

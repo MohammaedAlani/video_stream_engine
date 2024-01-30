@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# write log to /var/log
+echo "Restream HLS started at $(date)" >> /var/log/restream_hls.log
+
 # Change to the directory where your Laravel project is located
 cd /var/www/html/video_stream_engine
 

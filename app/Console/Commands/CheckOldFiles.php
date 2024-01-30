@@ -26,13 +26,15 @@ class CheckOldFiles extends Command
      */
     public function handle()
     {
+        Log::info('Starting to check old files...');
+
         $basePath = base_path('public/channels');
 
         $files = $this->processDirectories($basePath);
 
         $this->removeOldFiles($files);
 
-        $this->info('Old files removed successfully.');
+        Log::info('Old files removed successfully.');
     }
 
     private function processDirectories($basePath, $pattern = '.ts') {

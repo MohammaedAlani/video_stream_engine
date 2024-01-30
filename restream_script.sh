@@ -10,3 +10,6 @@ sudo killall ffmpeg
 php artisan restream:hls
 
 # The script will exit after the php artisan restream:hls command is completed
+
+# Add log to /var/log
+echo "Restream HLS completed at $(date)" >> /var/log/restream_hls.log

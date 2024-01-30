@@ -26,7 +26,7 @@ class RestreamHLS extends Command
         $basePath = base_path('public/channels');
 
         // Stop existing FFMPEG processes outside the loop
-//        $this->stopExistingProcesses();
+        $this->stopExistingProcesses();
 
         foreach ($channels as $channel) {
             $channelUrl = $channel->stream_url;
@@ -78,6 +78,18 @@ class RestreamHLS extends Command
                 $process = Process::fromShellCommandline($ffmpegCommand);
                 $process->setTimeout(null); // Set the timeout to null (no timeout)
                 $process->start();
+
+                usleep(100000); // 100 milliseconds
+
+                $processId = $process->getPid();
+
+
+                $processIdFilePath = $this->removeLastPartOfUrl($outputPath) . '/'.$this->getFileNameFromUrl($outputPath).'_process_id.json';
+                file_put_contents($processIdFilePath, json_encode([
+                    'process_id' => $processId,
+                    'command' => $ffmpegCommand,
+                    'stream_url' => $streamUrlTarget,
+                ], JSON_PRETTY_PRINT));
 
                 StreamChannel::updateOrCreate(
                     ['stream_url' => $newUrl],

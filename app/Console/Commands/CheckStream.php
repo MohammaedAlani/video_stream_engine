@@ -29,14 +29,6 @@ class CheckStream extends Command
      */
     public function handle()
     {
-        $process = Process::fromShellCommandline("echo Hello!!");
-        $process->setTimeout(null); // Set the timeout to null (no timeout)
-        $process->start();
-
-        usleep(100000); // 100 milliseconds
-        dd($process->getPid());
-
-
         $basePath = base_path('public/channels');
 
         $files = $this->processDirectories($basePath);

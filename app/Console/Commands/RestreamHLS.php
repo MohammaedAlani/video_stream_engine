@@ -26,7 +26,7 @@ class RestreamHLS extends Command
         $basePath = base_path('public/channels');
 
         // Stop existing FFMPEG processes outside the loop
-        $this->stopExistingProcesses();
+//        $this->stopExistingProcesses();
 
         foreach ($channels as $channel) {
             $channelUrl = $channel->stream_url;

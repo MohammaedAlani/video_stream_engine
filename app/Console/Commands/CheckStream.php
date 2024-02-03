@@ -55,7 +55,7 @@ class CheckStream extends Command
 
                 usleep(100000); // 100 milliseconds
 
-                $processId = $process->getPid();
+                $processId = $process->getPid()+1;
 
                 // save all information for the new process into log
                 Log::info('The HLS stream is being restreamed.' . $command);

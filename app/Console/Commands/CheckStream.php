@@ -65,6 +65,9 @@ class CheckStream extends Command
                     'process_id' => $processId,
                     'command' => $command,
                 ], JSON_PRETTY_PRINT));
+            }else{
+                Log::info('The HLS stream is running.' . $pid);
+                Log::info('The HLS stream is running.' . $command);
             }
         }
     }

@@ -47,9 +47,9 @@ class CheckStream extends Command
             $isRunning = $this->isProcessRunning($pid);
 
             if (!$isRunning) {
-//                // process is not running, so we need to restart it
+                // process is not running, so we need to restart it
                 $process = Process::fromShellCommandline($command);
-                $process->setTimeout(null); // Set the timeout to null (no timeout)
+                $process->setTimeout(900); // Set the timeout to null (no timeout)
                 $process->start();
 
                 usleep(100000); // 100 milliseconds
@@ -111,17 +111,12 @@ class CheckStream extends Command
         if (!is_numeric($pid) || $pid <= 0) {
             return false; // Invalid or non-positive process ID
         }
-
-        try {
-            // Use Symfony Process to check if the process is running
-            $process = new Process(['pgrep', '-c', '-F', '/dev/null', (string)$pid]);
-            $process->run();
-
-            // Check if the process was successfully executed and the output is greater than 0
-            return $process->isSuccessful() && (intval(trim($process->getOutput())) > 0);
-        } catch (\Exception $e) {
-            return false;
-        }
+    
+        // Use ps command to check if the process is running
+        exec("ps -p $pid", $output, $returnCode);
+    
+        // Check if the ps command was successful and the output contains the process information
+        return ($returnCode === 0 && count($output) > 1);
     }
 
     private function removeLastPartOfUrl($url)

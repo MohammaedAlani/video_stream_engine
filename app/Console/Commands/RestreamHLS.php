@@ -82,10 +82,10 @@ class RestreamHLS extends Command
 
                 usleep(100000); // 100 milliseconds
 
-                $processId = $process->getPid();
+                $processId = $process->getPid()+1;
 
 
-                $processIdFilePath = $this->removeLastPartOfUrl($outputPath) . '/'.$this->getFileNameFromUrl($outputPath).'_process_id.json';
+                $processIdFilePath = $this->removeLastPartOfUrl($outputPath) . '/' . $this->getFileNameFromUrl($outputPath) . '_process_id.json';
                 file_put_contents($processIdFilePath, json_encode([
                     'process_id' => $processId,
                     'command' => $ffmpegCommand,

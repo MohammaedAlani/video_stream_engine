@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 
@@ -56,8 +57,10 @@ class CheckStream extends Command
 
                 $processId = $process->getPid();
 
-                // save the process id to a file $path
+                // save all information for the new process into log
+                Log::info('The HLS stream is being restreamed.' . $command);
 
+                // save the process id to a file $path
                 file_put_contents($file, json_encode([
                     'process_id' => $processId,
                     'command' => $command,
@@ -111,10 +114,10 @@ class CheckStream extends Command
         if (!is_numeric($pid) || $pid <= 0) {
             return false; // Invalid or non-positive process ID
         }
-    
+
         // Use ps command to check if the process is running
         exec("ps -p $pid", $output, $returnCode);
-    
+
         // Check if the ps command was successful and the output contains the process information
         return ($returnCode === 0 && count($output) > 1);
     }

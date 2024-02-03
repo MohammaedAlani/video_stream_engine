@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')->hourly();
         $schedule->command('restream:check-old-files')->everyMinute();
-        $schedule->command('restream:check')->everyMinute();
+        $schedule->command('restream:check')->everyThirtySeconds();
     }
 
     /**

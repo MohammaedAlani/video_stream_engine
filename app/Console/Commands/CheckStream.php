@@ -50,7 +50,7 @@ class CheckStream extends Command
             if (!$isRunning) {
                 // process is not running, so we need to restart it
                 $process = Process::fromShellCommandline($command);
-                $process->setTimeout(900); // Set the timeout to null (no timeout)
+                $process->setTimeout(60); // Set the timeout to null (no timeout)
                 $process->start();
 
                 usleep(100000); // 100 milliseconds

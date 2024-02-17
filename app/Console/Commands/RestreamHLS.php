@@ -33,12 +33,15 @@ class RestreamHLS extends Command
             // Create Guzzle client and set headers
             $client = new Client();
             $headers = [
-                'sec-ch-ua' => '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"',
-                'Referer' => '',
-                'DNT' => 1,
-                'sec-ch-ua-mobile' => '?0',
+                'Origin' => 'http://web.mytvplus.net',
+                'Referer' => 'http://web.mytvplus.net/',
                 'User-Agent' => 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
-                'sec-ch-ua-platform' => '"macOS"',
+                'Pragma' => 'no-cache',
+                'Cache-Control' => 'no-cache',
+                'Connection' => 'keep-alive',
+                'Accept-Encoding' => 'gzip, deflate',
+                'Accept-Language' => 'en-US,en;q=0.5',
+                'Accept' => '*/*',
             ];
 
             // Make the request

@@ -72,7 +72,9 @@ class RestreamHLS extends Command
                 $newUrl = config('app.url') . "/" . $this->getPathAfterPublic($outputPath);
                 $channelName = $this->extractNameFromUrl($streamUrlTarget);
 
-                $ffmpegCommand = "ffmpeg -i " . escapeshellarg($streamUrlTarget) . " -c copy -f hls -hls_time 10 -hls_list_size 6 -hls_flags delete_segments " . escapeshellarg($outputPath) . " > /dev/null 2>&1";
+//                $ffmpegCommand = "ffmpeg -i " . escapeshellarg($streamUrlTarget) . " -c copy -f hls -hls_time 10 -hls_list_size 6 -hls_flags delete_segments " . escapeshellarg($outputPath) . " > /dev/null 2>&1";
+                $ffmpegCommand = "ffmpeg -i " . escapeshellarg($streamUrlTarget) . " -max_redirects 10 -c copy -f hls -hls_time 10 -hls_list_size 6 -hls_flags delete_segments " . escapeshellarg($outputPath) . " > /dev/null 2>&1";
+
 
                 // No need to check for existing FFMPEG processes within the loop
 

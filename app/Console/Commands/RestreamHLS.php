@@ -44,6 +44,7 @@ class RestreamHLS extends Command
             // Make the request
             $response = $client->request('GET', $channelUrl, [
                 'headers' => $headers,
+                'allow_redirects' => true,
             ]);
 
 
@@ -82,7 +83,7 @@ class RestreamHLS extends Command
 
                 usleep(100000); // 100 milliseconds
 
-                $processId = $process->getPid()+1;
+                $processId = $process->getPid() + 1;
 
 
                 $processIdFilePath = $this->removeLastPartOfUrl($outputPath) . '/' . $this->getFileNameFromUrl($outputPath) . '_process_id.json';
